@@ -1,7 +1,6 @@
 package com.springbook.biz.view.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -10,7 +9,7 @@ public class LogoutController implements Controller {
 
 	@Override
 	public String handlerRequest(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("·Î±× ¾Æ¿ô Ã³¸®");
+		System.out.println("·Î±× ¾Æ¿ô Ã³¸® - MVC Framework - Controller È£Ãâ");
 		
 		// 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿? ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 		HttpSession session = request.getSession();

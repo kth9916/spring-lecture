@@ -2,7 +2,6 @@ package com.springbook.biz.impl;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,21 +12,20 @@ import com.springbook.biz.common.LogAdvice;
 @Service ("boardService")     //비즈니스 로직을 처리하는 클래스 (BoardServiceImpl.java)   
 public class BoardServiceImpl implements BoardService {
 	
-	
 	//@Autowired		//객체 주입 
-	//private BoardDAO boardDAO;			// JSP에서 구현한 DAO
+	//private BoardDAO boardDAO;		//JSP 에서 구현한 DAO 
 	
-	@Autowired
-	private BoardDAOSpring boardDAO;		// Spring에서 구현한 DAO
+	@Autowired			
+	private BoardDAOSpring boardDAO; 	//Spring 에서 구현한 DAO 
 	
 	
-	// 모든 메소드가 실행되기 전에 Log를 남겨야 한다.
-	//private LogAdvice log;		// 객체 선언
-	//private Log4jAdvice log2;
+	//모든 메소드가 실행되기 전에 Log 를 남겨야 한다. 
+	//private LogAdvice log;    //객체 선언 
+	//private Log4jAdvice log2; 
 	
-	public BoardServiceImpl() {		// 기본 생성자 호출시 log 객체 생성
-		//log = new LogAdvice();
-		//log2 = new Log4jAdvice();
+	public BoardServiceImpl () {   //기본 생성자 호출시 log 객체 생성 
+		//log = new LogAdvice(); 
+		//log2 = new Log4jAdvice(); 
 	}
 
 	@Override
@@ -35,16 +33,16 @@ public class BoardServiceImpl implements BoardService {
 		//log.printLog();
 		//log2.printLogging();
 		
+		//예외 강제 발생 
 		/*
-		// 예외 강제 발생
-		if(vo.getSeq() == 0) {
-			//throw new IllegalArgumentException("0 번 글은 등록 할 수 없습니다.");
-			throw new NumberFormatException("부적절한 숫자 입력됨");
+		if (vo.getSeq() == 0 ) {
+			//throw new IllegalArgumentException("0 번 글은 등록 할 수 없습니다. ");
+			throw new NumberFormatException ("부적절한 숫자 입력됨");
 		}
 		*/
 		
-		boardDAO.insertBoard(vo);		// Insert 잘됨
-	//	boardDAO.insertBoard(vo);		// Primary Key 오류 발생
+		boardDAO.insertBoard(vo);		//Insert 잘됨
+	//	boardDAO.insertBoard(vo);		//Primary Key 오류 발생 
 	}
 
 	@Override

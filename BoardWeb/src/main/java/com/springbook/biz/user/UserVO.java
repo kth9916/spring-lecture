@@ -3,11 +3,11 @@ package com.springbook.biz.user;
 public class UserVO {
 	private String id;
 	private String password;
-	private String name;
+	private String name; 
 	private String role;
 	
-	// getter, setter 생성 (alt + shift + s)
 	
+	//getter, setter 생성 ( art + shift + s )
 	public String getId() {
 		return id;
 	}
@@ -35,12 +35,9 @@ public class UserVO {
 	
 	
 	@Override
-	public String toString() { // UserVO 객체의 RAM에 로드된 값을 출력
+	public String toString() { //UserVO 객체의 RAM에 로드된 값을 출력
 		
 		return "UserVO [id="+id+", password="+password+", name="+name+", role="+role+"]";
-	}
-	
-	
-	
+	} 
 	
 }

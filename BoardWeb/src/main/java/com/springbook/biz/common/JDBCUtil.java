@@ -1,15 +1,18 @@
 package com.springbook.biz.common;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class JDBCUtil {
+	public JDBCUtil () {
+		
+	}
 	
 	//메소드 호출시 Connection객체를 생성해서 리턴 돌려줌 
-	public static Connection getConnection() {		
+	public static Connection getConnection() {
+		JDBCUtil jdbcutil = new JDBCUtil(); 
 		try {
 			Class.forName("org.h2.Driver");
 			return DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", ""); 

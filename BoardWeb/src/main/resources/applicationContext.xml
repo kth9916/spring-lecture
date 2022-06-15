@@ -16,44 +16,44 @@
  -->
 <context:component-scan base-package="com.springbook.biz"></context:component-scan>
 
-<!-- AOP 어노테이션을 검색할 수 있도록 설정 
+<!--  AOP 어노테이션을 검색할 수 있도록 설정  
 <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 -->
 
-<!-- DataSource 설정 2 (프로퍼티 파일을 사용한 설정)  :
-	 DB 연동 할 때 사용, JDBCTemplate, mybatis , JPA 연동시 사용  -->
-<context:property-placeholder location="classpath:config/database.properties" />	 
-<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-	<property name="driverClassName" value="${jdbc.driver}"></property>
-	<property name="url" value="${jdbc.url}"></property>
-	<property name="username" value="${jdbc.username}"></property>
-	<property name="password" value="${jdbc.password}"></property>
+<!-- DataSource 설정 2.  (프로퍼티 파일을 사용한 설정)  : 
+	DB 연동 할때 사용 , JDBCTemplate, mybatis , JPA 연동시 사용 -->
+<context:property-placeholder location="classpath:config/oracle.properties"  />
+<bean id= "dataSource" class = "org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<property name = "driverClassName" value = "${jdbc.driver}" />
+	<property name = "url" value = "${jdbc.url}" /> 
+	<property name = "username" value= "${jdbc.username}" />
+	<property name = "password" value= "${jdbc.password}" /> 
 </bean>
 
-<!-- Spring JDBC 설정 : JDBCTemplate 객체생성해서 DI -->
-<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
-	<property name="dataSource" ref="dataSource"></property>
+<!-- Spring JDBC 설정 : JDBCTemplate 객체생성해서 DI   -->
+<bean id = "jdbcTemplate" class = "org.springframework.jdbc.core.JdbcTemplate">
+	<property name = "dataSource" ref = "dataSource" /> 
+
 </bean>
 
-<!-- 트랜 젝션 설정 : 트랜젝션을 처리하는 관리자를 빈 등록 -->
-
-<bean id = "txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	<property name="dataSource" ref="dataSource"></property>
+<!--  트랜 잭션 설정  : 트랜잭션을 처리하는 관리자를 빈등록 -->
+	<!-- 트랜잭션 관리자 빈등록 -->
+<bean id ="txManager" class = "org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref= "dataSource"></property>
 </bean>
 
-<!-- 트랜젝션 어드바이스 셋팅 -->
-<tx:advice id="txAdvice" transaction-manager="txManager">
+<!-- 트랜잭션 어드바이스 셋팅  -->
+<tx:advice id = "txAdvice" transaction-manager= "txManager">
 	<tx:attributes>
-		<tx:method name="get*" read-only="true" />	<!-- get으로 시작되는 모든 메소드는 읽기, 트랜잭션 처리에서 제외 -->
-		<tx:method name="*"/>	<!-- get* 이외의 모든 메소드는 트랜젝션 처리됨 -->
+		<tx:method name="get*" read-only="true"/>   <!-- get으로 시작되는 모든 메소드는 읽기, 트랜재션 처리에서 제외 -->
+		<tx:method name="*"/>	<!-- get*이외의 모든 메소드는 트랜잭션 처리됨  -->
 	</tx:attributes>
-
 </tx:advice>
 
-<!-- 트랜젝션이 처리될 포인트컷 지정 : 트랜젝션을 처리할 필터링된 메소드 설정 -->
+<!-- 트랜잭션이 처리될 포인트컷 지정 : 트랜잭션을 처리할 필터링된 메소드 설정  -->
 <aop:config>
-	<aop:pointcut expression="execution(* com.springbook.biz..*(..))" id="txPointcut"/>
-	<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
+	<aop:pointcut expression="execution(* com.springbook.biz..*(..))" id="txPointcut" />
+	<aop:advisor pointcut-ref="txPointcut" advice-ref= "txAdvice"/>
 </aop:config>
 
 
@@ -64,116 +64,149 @@
 
 
 
-<!-- DataSource 설정 1 (기본 셋팅)  : DB 연동 할 때 사용, JDBCTemplate, mybatis , JPA 연동시 사용 
-<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-	<property name="driverClassName" value="org.h2.Driver"></property>
-	<property name="url" value="jdbc:h2:tcp://localhost/~/test"></property>
-	<property name="username" value="sa" ></property>
-	<property name="password" value=""></property>
+
+
+
+
+
+
+<!-- DataSource 설정 1.  (기본 셋팅)  : DB 연동 할때 사용 , JDBCTemplate, mybatis , JPA 연동시 사용 
+<bean id= "dataSource" class = "org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<property name = "driverClassName" value = "org.h2.Driver" />
+	<property name = "url" value = "jdbc:h2:tcp://localhost/~/test" /> 
+	<property name = "username" value= "sa" />
+	<property name = "password" value= "" /> 
 </bean>
- -->
-
-
-
-
-
-
-
-
-
-
-
-<!-- AroundAdvice2 : JoinPoint 와 바인드 변수 적용
-<bean id="log" class="com.springbook.biz.common.AroundAdvice2"></bean>
- -->
-
-<!-- AOP 설정
-<aop:config>	
-<aop:pointcut expression="execution(* com.springbook.biz..*Impl.*(..))" id="allPointcut"/>
-<aop:pointcut expression="execution(* com.springbook.biz..*Impl.get*(..))" id="getPointcut"/>
-		
-<aop:aspect ref="log">
-<aop:around pointcut-ref = "allPointcut" method="aroundLog" />
-</aop:aspect>
-		
-</aop:config>  
- -->
-
-
-
-
-
-
-<!-- AafterThrowingAdvice2 : JoinPoint 와 바인드 변수 적용 
-<bean id="log" class="com.springbook.biz.common.AfterThrowingAdvice2"></bean>
 -->
 
-<!-- AOP 설정
-<aop:config>	
-<aop:pointcut expression="execution(* com.springbook.biz..*Impl.*(..))" id="allPointcut"/>
-<aop:pointcut expression="execution(* com.springbook.biz..*Impl.get*(..))" id="getPointcut"/>
-		
-<aop:aspect ref="log">
-<aop:after-throwing pointcut-ref = "allPointcut" method="exceptionLog" throwing = "exceptionObj"/>
-</aop:aspect>
-		
-</aop:config>  
- -->
+
+
+
+
+
+
+<!--  AroundAdvice2 : JoinPoint 와 바인드 변수 적용  
+<bean id = "log" class = "com.springbook.biz.common.AroundAdvice2"></bean>
+-->
+<!-- AOP 설정  
+<aop:config>
+ <aop:pointcut expression="execution(* com.springbook.biz..*Impl.*(..))" id="allPointcut"/>
+ <aop:pointcut expression="execution(* com.springbook.biz..*Impl.get*(..))" id="getPointcut"/>
  
-<!-- AafterReturningAdvice2 : JoinPoint 와 바인드 변수 적용 
-<bean id="log" class="com.springbook.biz.common.AfterReturning2"></bean>
--->
-	<!-- AOP 설정 
-<aop:config>	
-<aop:pointcut expression="execution(* com.springbook.biz..*Impl.*(..))" id="allPointcut"/>
-<aop:pointcut expression="execution(* com.springbook.biz..*Impl.get*(..))" id="getPointcut"/>
-		
-<aop:aspect ref="log">
-<aop:after-returning pointcut-ref = "allPointcut" method="afterReturningLog" returning = "returnObj"/>
-</aop:aspect>
-		
-</aop:config>  
--->
-
-
+ <aop:aspect ref= "log">
+ 	<aop:around  pointcut-ref = "allPointcut" method="aroundLog" />	
  
- <!--  <bean id="log" class="com.springbook.biz.common.AfterThrowingAdvice"></bean> -->	
+ </aop:aspect>
 
-	<!-- AOP 설정
-	<aop:config>	
-		<aop:pointcut expression="execution(* com.springbook.biz..*Impl.*(..))" id="allPointcut"/>
-		<aop:pointcut expression="execution(* com.springbook.biz..*Impl.get*(..))" id="getPointcut"/>
-		
-		<aop:aspect ref="log">
-			<aop:after-throwing pointcut-ref = "allPointcut" method="exceptionLog"/>
-		</aop:aspect>
-		
-	</aop:config>  
-	 -->
+</aop:config>
+-->
 
-	
-<!-- 생성자를 사용한 객체 주입 : UserServiceImpl.java 설정 
-<bean id = "userService" class = "com.springbook.biz.impl.UserServiceImpl">
+
+
+<!--  AfterThrowingAdvice2 : JoinPoint 와 바인드 변수 적용  
+<bean id = "log" class = "com.springbook.biz.common.AfterThrowingAdvice2"></bean>
+-->
+<!-- AOP 설정  
+<aop:config>
+ <aop:pointcut expression="execution(* com.springbook.biz..*Impl.*(..))" id="allPointcut"/>
+ <aop:pointcut expression="execution(* com.springbook.biz..*Impl.get*(..))" id="getPointcut"/>
+ 
+ <aop:aspect ref= "log">
+ 	<aop:after-throwing  pointcut-ref = "allPointcut" method="exceptionLog" throwing = "exceptionObj"/>	
+ 
+ </aop:aspect>
+
+</aop:config>
+-->
+
+
+
+
+
+<!--  AfterReturingAdvice2 : JoinPoint 와 바인드 변수 적용 
+<bean id = "log" class = "com.springbook.biz.common.AfterReturning2"></bean>
+ -->
+<!-- AOP 설정  
+<aop:config>
+ <aop:pointcut expression="execution(* com.springbook.biz..*Impl.*(..))" id="allPointcut"/>
+ <aop:pointcut expression="execution(* com.springbook.biz..*Impl.get*(..))" id="getPointcut"/>
+ 
+ <aop:aspect ref= "log">
+ 	<aop:after-returning  pointcut-ref = "allPointcut" method="afterReturningLog" returning = "returnObj"/>	
+ 	
+ </aop:aspect>
+
+</aop:config>
+-->
+
+
+
+<!--  BeforeAdvice2 : JoinPoint 와 바인드 변수 적용   
+<bean id = "log" class = "com.springbook.biz.common.BeforeAdvice2"></bean>
+--> 
+<!-- AOP 설정  
+<aop:config>
+ <aop:pointcut expression="execution(* com.springbook.biz..*Impl.*(..))" id="allPointcut"/>
+ <aop:pointcut expression="execution(* com.springbook.biz..*Impl.get*(..))" id="getPointcut"/>
+ 
+ <aop:aspect ref= "log">
+ 	<aop:before  pointcut-ref = "allPointcut" method="beforeLog"/>	
+ </aop:aspect>
+
+</aop:config>
+-->
+
+
+
+
+<!--  
+<bean id = "log" class = "com.springbook.biz.common.AfterThrowingAdvice"></bean>
+-->
+<!-- AOP 설정  
+<aop:config>
+ <aop:pointcut expression="execution(* com.springbook.biz..*Impl.*(..))" id="allPointcut"/>
+ <aop:pointcut expression="execution(* com.springbook.biz..*Impl.get*(..))" id="getPointcut"/>
+ 
+ <aop:aspect ref= "log">
+ 	<aop:after-throwing  pointcut-ref = "allPointcut" method="exceptionLog"/>
+ 	
+ </aop:aspect>
+
+</aop:config>
+-->
+
+
+
+
+
+
+
+
+
+
+<!-- 생성자 를 사용한 객체 주입 : UserServiceImpl.java 설정 
+<bean id = "userService" class ="com.springbook.biz.impl.UserServiceImpl">
 	<constructor-arg ref = "userDAO"></constructor-arg>
 </bean>
 
-<bean id = "userDAO" class = "com.springbook.biz.impl.UserDAO"></bean>
+<bean id = "userDAO" class = "com.springbook.biz.impl.UserDAO"> </bean>
 -->
 
-<!-- Setter를 사용한 객체 주입 : UserServiceImpl.java 설정 
-<bean id = "userService" class = "com.springbook.biz.impl.UserServiceImpl">
-	<property name="userDAO" ref="userDAO"></property>
+<!-- Setter 를 사용한 객체 주입 : UserServiceImpl.java 설정  
+<bean id = "userService" class ="com.springbook.biz.impl.UserServiceImpl">
+	<property name = "userDAO" ref = "userDAO"> </property>
 </bean>
 
-<bean id = "userDAO" class = "com.springbook.biz.impl.UserDAO"></bean>
--->
+<bean id = "userDAO" class = "com.springbook.biz.impl.UserDAO"> </bean>
+ -->
 
-  <!-- 
+<!--
+ 
 <context:component-scan base-package="polymorphism_5_1_1"></context:component-scan>
 
-
+  
 <context:component-scan base-package="polymorphism_5_2_1"></context:component-scan>
- -->
+-->
 
 <!-- 스프링 프레임 워크에서 객체를 생성후 DI(의존성 주입)으로 객체를 주입한다.  -->
 

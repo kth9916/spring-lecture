@@ -1,6 +1,7 @@
 <%@page import="com.springbook.biz.board.BoardVO"%>
 <%@page contentType="text/html; charset=EUC-KR"%>
 <%
+// 세션에 저장된 게시글 정보를 꺼낸다.
 	BoardVO board = (BoardVO) session.getAttribute("board");
 %>
 

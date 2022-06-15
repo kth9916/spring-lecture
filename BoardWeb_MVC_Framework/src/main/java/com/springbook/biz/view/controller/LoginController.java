@@ -1,7 +1,6 @@
 package com.springbook.biz.view.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
 
 import com.springbook.biz.user.UserVO;
@@ -25,15 +24,15 @@ public class LoginController implements Controller {
 					UserDAO userDAO = new UserDAO();
 					UserVO user = userDAO.getUser(vo);
 
-					// 3. 화면 네비게이션 (뷰 페이지를 돌려줌)
+					// 3. 화면 네비게이션  (뷰 페이지를 돌려줌 )
 					if (user != null) {
-						return "getBoardList.do";
+						return "getBoardList.do"; 
 					} else {
-						return "login";		// ViewResolver 페이지에서 뷰페이지를 완성함
+						return "login";   // ViewResolver 페이지에서 뷰페이지를 완성함. 
 					}
+					
 		
-		// 뷰페이지를 리턴 함.
-
+	
 	}
 
 }

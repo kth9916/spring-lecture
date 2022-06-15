@@ -2,7 +2,6 @@ package com.springbook.biz.view.controller;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,7 +14,7 @@ public class GetBoardListController implements Controller {
 
 	@Override
 	public String handlerRequest(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("글 목록 검색 처리");
+		System.out.println("글 목록 검색 처리 -- MVC FrameWork 에서 처리 ");
 		// 1. 사용자 입력 정보 추출(검색 기능은 나중에 구현)
 		// 2. DB 연동 처리
 		BoardVO vo = new BoardVO();
