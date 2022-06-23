@@ -9,9 +9,9 @@
     <init-param>
     	<param-name>contextConfigLocation</param-name>
     	<param-value>/WEB-INF/config/presentation-layer.xml</param-value>  
-    </init-param>
- 
+    </init-param> 
   </servlet>
+  
   <servlet-mapping>
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
