@@ -44,6 +44,19 @@
 		]]>
 	</select>
 
+	<!--  
+	<select id="getBoardList" resultType="board">
+		<![CDATA[
+		SELECT *
+		FROM BOARD
+		ORDER BY SEQ DESC
+		]]>
+	</select>
+	
+	resultType, resultMap 둘 다 괜찮다.
+	-->
+	
+
 	<select id="getBoardList" resultMap="boardResult">
 		SELECT *
 		FROM BOARD
@@ -57,4 +70,5 @@
 		ORDER BY SEQ DESC
 	</select>
 
+	
 </mapper>

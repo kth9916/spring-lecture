@@ -10,7 +10,7 @@
 <!-- annotation 기반으로 Controller 세팅 -->
 
 <!-- com.springbook.biz 하위의 모든 클래스에서 @(annotation)을 스캔 가능하도록  -->
-<context:component-scan base-package="com.springbook.biz"></context:component-scan>
+	<context:component-scan base-package="com.springbook.biz"></context:component-scan>
 
 <!-- MultipartResolver 설정 : 파일 업로드 빈을 세팅 : <<주의 : 빈이름을 임의로 변경하면 안됨.>>-->
 	
@@ -22,21 +22,20 @@
 
 <!-- MappingJackson2HttpMessageConverter : JSON 포맷으로 변환 처리함 -->
 
-<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven></mvc:annotation-driven>
 
 <!-- XML 기반의 예외 설정 : 주의 : 빈의 이름 변경시 오류 발생됨 -->
 
-<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-	<property name = "exceptionMappings">
-		<props>
-			<prop key="java.lang.ArithmeticException"> common/arithmeticError.jsp</prop>
-			<prop key="java.lang.NullPointerException"> common/nullPointerError.jsp</prop>
-			<prop key="java.lang.IllegalArgumentException"> common/arithmeticError.jsp</prop>
-		
-		</props>
-	</property>
-	<property name="defaultErrorView" value = "common/error.jsp"></property>
-</bean>
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name = "exceptionMappings">
+			<props>
+				<prop key="java.lang.ArithmeticException"> common/arithmeticError.jsp</prop>
+				<prop key="java.lang.NullPointerException"> common/nullPointerError.jsp</prop>
+				<prop key="java.lang.IllegalArgumentException"> common/arithmeticError.jsp</prop>
+			</props>
+		</property>
+		<property name="defaultErrorView" value = "common/error.jsp"></property>
+	</bean>
 
 <!--  다국어 처리 설정 <<시작>> -->
    <!-- 1. 다국어를 처리할 messageSource 등록  -->

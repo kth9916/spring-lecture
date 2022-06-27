@@ -15,10 +15,9 @@ public class BoardDAOMyBatis {
 		mybatis = SqlSessionFactoryBean.getSqlSessionInstance();
 	}
 	
-	public void insertBoard(BoardVO vo) {
-		
+	public void insertBoard(BoardVO vo) {		
 		System.out.println("MyBatis를 사용해서 insertBoard() 메소드 호출 ");
-		
+
 		mybatis.insert("BoardDAO.insertBoard",vo);
 		mybatis.commit();
 	}
@@ -35,6 +34,11 @@ public class BoardDAOMyBatis {
 		return (BoardVO) mybatis.selectOne("BoardDAO.getBoard",vo);
 	}
 	public List<BoardVO> getBoardList(BoardVO vo){
-		return mybatis.selectList("BoardDAO.getBoard", vo);
+		System.out.println("MyBatis를 사용해서 getBoardLIst() 메소드 호출");
+
+		
+		return mybatis.selectList("BoardDAO.getBoardList", vo);
 	}
+	
+	// getBoard getBoardLIst는 select type이라서 return이 필요하다.
 }

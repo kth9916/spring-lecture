@@ -21,8 +21,7 @@
 				<tr>
 					<td bgcolor="orange">이름</td>
 					<td align="left"><input type="text" name="name" size="10" /></td>
-				</tr>
-				
+				</tr>		
 				<tr>
 					<td bgcolor="orange">역활</td>
 					<td align="left"><input type="text" name="role" size="10" /></td>
