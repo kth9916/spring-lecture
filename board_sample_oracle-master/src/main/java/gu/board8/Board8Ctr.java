@@ -28,7 +28,7 @@ public class Board8Ctr {
     public String boardList(SearchVO searchVO, ModelMap modelMap) {
         
         if (searchVO.getBgno() == null) {
-            searchVO.setBgno("1"); 
+            searchVO.setBgno("2"); 
         }
         searchVO.pageCalculate( boardSvc.selectBoardCount(searchVO) ); // startRow, endRow
 

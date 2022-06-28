@@ -22,7 +22,7 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
          <property name="driverClassName" value="core.log.jdbc.driver.OracleDriver"/>
          <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>        
-        <property name="username" value="hr5" />
+        <property name="username" value="HR5" />
         <property name="password" value="1234" />
  
         <property name="maxActive" value="100" />
