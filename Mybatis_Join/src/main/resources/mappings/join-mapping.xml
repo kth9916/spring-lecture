@@ -28,6 +28,62 @@
 	<collection property="deptJ" resultMap="deptMap" />
 </resultMap>
 
+<!-- resultMap or resultType 잡는법
+
+1. method에서 resultMap쓰고 상단에 resultMap type에서 선언하고 sql-map-coinfig에서 위치 잡는 방법
+2.  sql-map-config에서 바로 alias 잡고 method에서 resultType으로 바로 사용
+
+-->
+
+
+
+<resultMap type="emps" id="employees">
+   <id property="employee_id" column="EMPLOYEE_ID" /> 
+   <result property="first_name" column="FIRST_NAME"></result>
+   <result property="last_name" column="LAST_NAME"></result>
+   <result property="email" column="EMAIL"></result>
+   <result property="phone_number" column="PHONE_NUMBER"></result>
+   <result property="hire_date" column="HIRE_DATE"></result>
+   <result property="job_id" column="JOB_ID"></result>
+   <result property="salary" column="SALARY"></result>
+   <result property="commission_pct" column="COMMISSION_PCT"></result>
+   <result property="manager_id" column="MANAGER_ID"></result>
+   <result property="department_id" column="DEPARTMENT_ID"></result>
+</resultMap>
+
+<resultMap type="depts" id="departments">
+   <id property="department_id" column="DEPARTMENT_ID" /> 
+   <result property="department_name" column="DEPARTMENT_NAME"></result>
+   <result property="manager_id" column="MANAGER_ID"></result>
+   <result property="location_id" column="LOCATION_ID"></result>
+</resultMap>
+
+<resultMap type="locs" id="locations">
+   <id property="location_id" column="LOCATION_ID" /> 
+   <result property="street_address" column="STREET_ADDRESS"></result>
+   <result property="postal_code" column="POSTAL_CODE"></result>
+   <result property="city" column="CITY"></result>
+   <result property="state_province" column="STATE_PROVINCE"></result>
+   <result property="country_id" column="COUNTRY_ID"></result>
+</resultMap>
+
+<resultMap type="j_h" id="job_history">
+   <id property="start_date" column="START_DATE" /> 
+   <result property="end_date" column="END_DATE"></result>
+   <result property="employee_id" column="EMPLOYEE_ID"></result>
+   <result property="job_id" column="JOB_ID"></result>
+   <result property="department_id" column="DEPARTMENT_ID"></result>
+</resultMap>
+
+<!-- 네 ResultMap을 처리하는 ResultMap -->
+<resultMap type="joinvo2" id="allJoin">
+	<collection property="emps" resultMap="employees" />
+	<collection property="depts" resultMap="departments" />
+	<collection property="locs" resultMap="locations" />
+	<collection property="j_h" resultMap="job_history" />
+</resultMap>
+
+
 
 <insert id="insertJoin">
 	<![CDATA[
@@ -73,6 +129,31 @@
 	]]>
 </select>
 
+<select id="selectListJoin3" resultMap="allJoin">
+	<![CDATA[
+		SELECT *
+		FROM EMPLOYEES E,
+			 DEPARTMENTS D,
+			 LOCATIONS L,
+			 JOB_HISTORY J
+		WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID
+			  AND D.LOCATION_ID = L.LOCATION_ID
+			  AND J.JOB_ID = E.JOB_ID
+	]]>
+</select>
+
+<select id="selectListJoin4" resultType="allJoinVO">
+	<![CDATA[
+		SELECT *
+		FROM EMPLOYEES E,
+			 DEPARTMENTS D,
+			 LOCATIONS L,
+			 JOB_HISTORY J
+		WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID
+			  AND D.LOCATION_ID = L.LOCATION_ID
+			  AND J.JOB_ID = E.JOB_ID
+	]]>
+</select>
 
 
 </mapper>

@@ -21,4 +21,12 @@ public class MybatisDAO {
 		System.out.println("selectListJoin() 메소드 호출 ");
 		return mybatis.selectList("join.selectListJoin2", vo); 
 	}
+	
+	public List<JoinVO2> selectListJoin3 (JoinVO2 vo) {
+		return mybatis.selectList("join.selectListJoin3", vo); 
+	}
+	
+	public List<AllJoinVO> selectListJoin4 (AllJoinVO vo) {
+		return mybatis.selectList("join.selectListJoin4", vo); 
+	}
 }

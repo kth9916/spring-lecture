@@ -12,6 +12,12 @@
 		<typeAlias type="com.mybatis.join.vo.EmployeeVO" alias="emp"/>
 		<typeAlias type="com.mybatis.join.vo.JoinVO" alias ="joinvo"/>
 		<typeAlias type="com.mybatis.join.vo.EnD_VO" alias ="end_vo"/>
+		<typeAlias type="com.mybatis.join.vo.AllJoinVO" alias ="allJoinVO"/>
+		<typeAlias type="com.mybatis.join.vo.JoinVO2" alias ="joinvo2"/>
+		<typeAlias type="com.mybatis.join.vo.DepartmentsVO" alias="depts"/>
+		<typeAlias type="com.mybatis.join.vo.EmployeesVO" alias="emps"/>
+		<typeAlias type="com.mybatis.join.vo.LocationsVO" alias="locs"/>
+		<typeAlias type="com.mybatis.join.vo.Job_HistoryVO" alias="j_h"/>
 	</typeAliases>
 	
 

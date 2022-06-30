@@ -54,7 +54,28 @@ public class JoinController {
 		
 		return "joinList.jsp"; 
 	}
+
+	@RequestMapping ("/joinList3.do")
+	public String selectList3 (JoinVO2 vo , Model model) {
+		System.out.println("컨트롤러 호출 성공 : /joinList3.do");
+		List<JoinVO2> joinList = mybatisDAO.selectListJoin3(vo);		
+				
+		
+		model.addAttribute("joinList", joinList); 
+		
+		return "joinList3.jsp"; 
+	}
 	
-	
+	@RequestMapping ("/joinList4.do")
+	public String selectList4 (AllJoinVO vo , Model model) {
+		System.out.println("컨트롤러 호출 성공 : /joinList4.do");
+		List<AllJoinVO> joinList = mybatisDAO.selectListJoin4(vo);
+
+		
+		
+		model.addAttribute("joinList", joinList); 
+		
+		return "joinList4.jsp"; 
+	}
 
 }

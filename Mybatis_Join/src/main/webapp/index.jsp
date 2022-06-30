@@ -9,10 +9,14 @@
 <body>
 
 	
- <a href = "http://localhost:9292/join/joinList.do ">
+ <a href = "http://localhost:8787/join/joinList.do ">
  조인 테이블 출력  (resultMap 사용) </a>
 <p> <p>
- <a href = "http://localhost:9292/join/joinList2.do ">
+ <a href = "http://localhost:8787/join/joinList2.do ">
  조인 테이블 출력2 (resultType 사용)  </a>
+  <a href = "http://localhost:8787/join/joinList3.do ">
+ 조인 테이블 출력3 (resultMap 사용)  </a>
+  <a href = "http://localhost:8787/join/joinList4.do ">
+ 조인 테이블 출력4 (resultType 사용)  </a>
 </body>
 </html>
